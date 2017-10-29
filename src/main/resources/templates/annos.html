@@ -1,0 +1,22 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Otsikko</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h1><span th:text="${annos.nimi}">annos</span></h1>
+
+        <ul>
+            <li th:each="aine: ${annosAine}">
+                <span th:text="${aine.nimi}"></span><a>, </a>
+                <span th:text="${aine.maara}"></span><a> </a>
+                <span th:text="${aine.ohje}"></span>
+            </li>
+        </ul>
+        <br/>
+        <a href="/">Takaisin arkistoon</a>
+    </body>
+</html>

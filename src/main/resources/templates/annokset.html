@@ -1,0 +1,56 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+ 
+    <head>
+        <title>Otsikko</title>
+        <meta charset="utf-8"/>
+    </head>
+ 
+    <body>
+        <h1>Reseptit</h1>
+       
+        <ul>
+            <li th:each="annos: ${annokset}">
+                <span th:text="${annos.nimi}"></span>
+                <form th:action="@{~/annokset/{id}(id=${annos.id})}" method="post">
+                    <input type="submit" value="Poista"/>
+                </form>
+            </li>
+        </ul>
+       
+        <form method="POST" action="/annokset">
+            <input type="text" name="name"/><br/>
+            <input type="submit" name="lisaaAnnos" value="Lisää"/>
+        </form>
+       
+        <br/>
+        <br/>
+        <h1>Lisää raaka-aineita</h1>
+        <br/>
+       
+        <form method="POST" action="/annokset">
+            Resepti johon lisätään:<br/>
+            <select class="form-control" id="annosId" name="annosId">
+                              <option th:each="annos : ${annokset}"
+                                      th:value="${annos.id}"
+                                      th:text="${annos.nimi}"/>
+                          </select><br/>
+                          Lisättävä raaka-aine:<br/>
+                   <select class="form-control" id="raakaAineId" name="raakaAineId">
+                <option th:each="aines : ${ainekset}"
+                        th:value="${aines.id}"
+                        th:text="${aines.nimi}"/>
+            </select><br/>
+            Järjestys:<br/>
+            <input type="text" name="jarjestys"/><br/>
+            Määrä:<br/>
+            <input type="text" name="maara"/><br/>
+            Ohje:<br/>
+            <input type="text" name="ohje"/><br/>
+            <input type="submit" name="lisaaAnnosRaakaAine" value="Lisää"/>
+        </form>
+       
+        <br/>
+        <a href="/">Takaisin arkistoon</a>
+    </body>
+</html>
